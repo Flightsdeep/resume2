@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jai Krishna | Interactive Resume</title>
+    <link href="https://fonts.googleapis.com/css?family=BenchNine:700|Open+Sans+Condensed:300" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #64ffda;
+            --bg: #0a192f;
+            --text-main: #ccd6f6;
+            --text-dim: #8892b0;
+            --bubble-bg: #112240;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: "Open Sans Condensed", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 50px 0;
+        }
+
+        /* The central word stack */
+        .wrapper {
+            width: 320px;
+            position: relative;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .word {
+            display: block;
+            font-family: "BenchNine";
+            text-transform: uppercase;
+            line-height: 0.85;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-dim);
+            position: relative;
+        }
+
+        .word:hover {
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Sizing based on your "Idea" */
+        .w1 { font-size: 6em; }   /* JAI */
+        .w2 { font-size: 8em; }   /* KRISHNA */
+        .w3 { font-size: 5em; }   /* SUMMARY */
+        .w4 { font-size: 6em; }   /* EXPERIENCE */
+        .w5 { font-size: 6.5em; } /* SKILLS */
+        .w6 { font-size: 5.5em; } /* EDUCATION */
+        .w7 { font-size: 7em; }   /* PROJECTS */
+        .w8 { font-size: 6em; }   /* CONTACT */
+
+        /* Bubble Logic */
+        .bubble {
+            position: absolute;
+            width: 280px;
+            background: var(--bubble-bg);
+            border: 1px solid var(--primary);
+            padding: 20px;
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Show bubble on hover of the parent word */
+        .word-group:hover .bubble {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Left-side Bubbles */
+        .left-bubble { left: -310px; top: 50%; transform: translateY(-50%) translateX(20px); }
+        .word-group:hover .left-bubble { transform: translateY(-50%) translateX(0); }
+
+        /* Right-side Bubbles */
+        .right-bubble { right: -310px; top: 50%; transform: translateY(-50%) translateX(-20px); }
+        .word-group:hover .right-bubble { transform: translateY(-50%) translateX(0); }
+
+        /* Specialized Content Styles */
+        h4 { color: var(--primary); text-transform: uppercase; margin-bottom: 8px; font-size: 1.4rem; }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 5px; }
+        .skill-tag { font-size: 0.8rem; border: 1px solid var(--primary); padding: 2px 6px; border-radius: 4px; }
+        .exp-item { margin-bottom: 10px; font-size: 0.9rem; border-bottom: 1px solid #233554; padding-bottom: 5px; }
+        
+        /* Game Styling */
+        #game-area { text-align: center; }
+        #game-input { width: 50px; background: transparent; border: 1px solid var(--primary); color: white; padding: 5px; }
+        #game-btn { background: var(--primary); border: none; padding: 5px 10px; cursor: pointer; font-weight: bold; }
+
+        @media (max-width: 900px) {
+            .left-bubble, .right-bubble { position: relative; left: 0; right: 0; width: 100%; transform: none; margin: 10px 0; display: none; }
+            .word-group:hover .bubble { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="word-group">
+        <span class="word w1">Jai</span>
+        <span class="word w2">Krishna</span>
+        <div class="bubble right-bubble">
+            <h4>Senior Software Engineer</h4>
+            <p>B.Tech AI & Data Science Student at Sona College.</p>
+            <p style="margin-top:10px; color: var(--primary)">"Coding is the logic I use to navigate the world."</p>
+        </div>
+    </div>
+
+    <div class="word-group">
+        <span class="word w3">Objective</span>
+        <div class="bubble left-bubble">
+            <h4>The Mission</h4>
+            <p>Searching for purpose through creation. Building performant, accessible systems to solve real-world problems while seeking financial stability and professional growth.</p>
+        </div>
+    </div>
+
+    <div class="word-group">
+        <span class="word w4">Experience</span>
+        <div class="bubble right-bubble">
+            <div class="exp-item">
+                <strong>PayWave Tech</strong>
+                <p>Senior Software Engineer. Reduced infra costs by 28% via Serverless.</p>
+            </div>
+            <div class="exp-item">
+                <strong>Nimbus Cloud</strong>
+                <p>Built SaaS features for 50k+ monthly active users.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="word-group">
+        <span class="word w5">Stack</span>
+        <div class="bubble left-bubble">
+            <h4>Technical Arsenal</h4>
+            <div class="skill-list">
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">React/Next.js</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">GraphQL</span>
+                <span class="skill-tag">Python</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="word-group">
+        <span class="word w6">Learning</span>
+        <div class="bubble right-bubble">
+            <h4>Education</h4>
+            <p><strong>B.Tech AI & Data Science</strong></p>
+            <p>Sona College of Technology</p>
+            <p>2023 — 2027</p>
+        </div>
+    </div>
+
+    <div class="word-group">
+        <span class="word w7">Projects</span>
+        <div class="bubble left-bubble">
+            <h4>Recent Work</h4>
+            <p><strong>OpenFin Ledger:</strong> Budgeting tool with OAuth & Audit logs.</p>
+            <p style="margin-top:5px;"><strong>Component Kit:</strong> Accessible UI primitives published on NPM.</p>
+        </div>
+    </div>
+
+    <div class="word-group">
+        <span class="word w8">Connect</span>
+        <div class="bubble right-bubble">
+            <h4>Get In Touch</h4>
+            <p>📧 jaikrishnaads@gmail.com</p>
+            <p>📍 Salem, TN, India</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
